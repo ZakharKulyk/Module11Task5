@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-
 public class ElementsMixing {
     public static void main(String[] args) {
         Stream<Integer> first = Stream.of(1, 2);
@@ -35,15 +34,13 @@ public class ElementsMixing {
                 .limit(min)
                 .collect(Collectors.toList());
 
+        List<T> result = Stream.iterate(0, n -> n + 1)
+                .limit(min)
+                .flatMap(n -> Stream.of(collect.get(n), collect1.get(n)))
+                .collect(Collectors.toList());
 
-        mixedList.addAll(collect);
-        mixedList.addAll(collect1);
-
-        Collections.shuffle(mixedList);
-
-
-        return mixedList.stream();
-
+        return result.stream();
     }
+
 
 }
